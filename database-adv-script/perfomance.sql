@@ -70,7 +70,7 @@ INNER JOIN uSERS U ON b.user_id
 INNER JOIN properties p ON b.property_id = p.property_id
 LEFT JOIN payment pay ON b.booking_id = pay.booking_id
 WHERE b.start_date >= CURRENT_DATE - INTERVAL '6 months'
-and b.status IN ('confirm', 'completed')
+AND b.status IN ('confirm', 'completed')
 ORDER BY B.start_date DESC
 
 -- Create indexes to support the optimized querry

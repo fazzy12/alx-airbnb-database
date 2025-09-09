@@ -77,3 +77,31 @@ ORDER BY B.start_date DESC
 CREATE INDEX idx_booking_start_date ON Booking(start_date);
 CREATE INDEX idx__bookings_status ON Bookings(status)
 CREATE INDEX idx_payments_booking_id ON payments(booking_id);
+
+
+-- Use EXPLAIN ANALYZE to analyze the optimized query performance
+EXPLAIN ANALYZE
+SELECT 
+    b.booking_id,
+    b.start_date,
+    b.end_date,
+    b.status as booking_status,
+    u.user_id,
+    u.first_name,
+    u.last_name,
+    u.email,
+    p.property_id,
+    p.title as property_title,
+    p.location as property_location,
+    p.price_per_night,
+    pay.payment_id,
+    pay.amount,
+    pay.status as payment_status,
+    pay.created_at as payment_date
+FROM Bookings b
+INNER JOIN Users u ON b.user_id = u.user_id
+INNER JOIN Properties p ON b.property_id = p.property_id
+LEFT JOIN Payments pay ON b.booking_id = pay.booking_id
+WHERE b.start_date >= CURRENT_DATE - INTERVAL '6 months'
+AND b.status IN ('confirmed', 'completed')
+ORDER BY b.start_date DESC;

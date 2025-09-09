@@ -1,4 +1,5 @@
 -- Indexes for Users table
+EXPLAIN ANALYZE 
 CREATE INDEX idx_users_email ON Users(email);
 CREATE INDEX idx_users_created_at ON Users(created_at);
 CREATE INDEX idx_users_first_last_name ON Users(first_name, last_name);

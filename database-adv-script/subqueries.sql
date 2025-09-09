@@ -8,6 +8,7 @@ WHERE id IN (
     HAVING AVG(rating) >= 4.0
 );
 
+-- Correlated subquery: Find users who have made more than 3 bookings
 SELECT *
 FROM Users u
 WHERE (

@@ -5,7 +5,7 @@ WHERE id IN (
     SELECT property_id
     FROM Reviews
     GROUP BY property_id
-    HAVING AVG(rating) >= 4.0
+    HAVING AVG(rating) > 4.0
 );
 
 -- Correlated subquery: Find users who have made more than 3 bookings
